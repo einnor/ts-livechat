@@ -16,4 +16,14 @@ export class SocketService {
         console.log('emitting message: ' + message);
         this.socket.emit('message', message);
     }
+
+    // link message event to rxjs data source
+    public onMessage (): Observable<ChatMessage> {
+        return fromEvent(this.socket, 'message');
+    }
+
+    // disconnect - used when unmounting
+    public disconnect (): void {
+        this.socket.disconnect();
+    }
 };
