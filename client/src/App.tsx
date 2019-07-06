@@ -31,6 +31,10 @@ class App extends React.Component {
       this.setState({ messages: messages });
     });
   }
+
+  componentWillUnmount () {
+    this.context.disconnect();
+  }
 }
 
 export default App;
