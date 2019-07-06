@@ -10,4 +10,10 @@ export class SocketService {
         this.socket = io('localhost:8080');
         return this;
     }
+
+    // send a message for the server to broadcast
+    public send (message: ChatMessage): void {
+        console.log('emitting message: ' + message);
+        this.socket.emit('message', message);
+    }
 };
