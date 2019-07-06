@@ -44,4 +44,8 @@ export class ChatServer {
           });
         });
     }
+
+    get app (): express.Application {
+        return this._app;
+    }
 }
