@@ -16,6 +16,21 @@ class App extends React.Component {
     ],
     input: '',
   }
+
+  componentDidMount () {
+
+    //initiate socket connection
+    this.context.init();
+
+    const observable = this.context.onMessage();
+
+    observable.subscribe((m: ChatMessage) => {
+      let messages = this.state.messages;
+
+      messages.push(m);
+      this.setState({ messages: messages });
+    });
+  }
 }
 
 export default App;
