@@ -21,4 +21,8 @@ export class ChatServer {
         this.initSocket();
         this.listen();
     }
+
+    private initSocket (): void {
+        this.io = socketIo(this.server);
+    }
 }
