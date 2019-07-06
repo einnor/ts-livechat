@@ -35,6 +35,57 @@ class App extends React.Component {
   componentWillUnmount () {
     this.context.disconnect();
   }
+
+  render () {
+    const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+      this.setState({ input: e.target.value });
+    }
+
+    const handleMessage = (): void => {
+
+      const author: string = 'Ross';
+
+      if (this.state.input !== '') {
+        this.context.send({
+          message: this.state.input,
+          author: author
+        });
+        this.setState({ input: '' });
+      }
+    };
+
+    let msgIndex = 0;
+    return (
+      <div className="App">
+        <img src={logo} className="App-logo" alt="logo" />
+
+        <div className="App-chatbox">
+          {this.state.messages.map((msg: ChatMessage) => {
+            msgIndex++;
+            return (
+              <div key={msgIndex}>
+                <p>{msg.author}</p>
+                <p>
+                  {msg.message}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+        <input
+          className="App-Textarea"
+          placeholder="Type your messsage here..."
+          onChange={updateInput}
+          value={this.state.input}
+        />
+        <p>
+          <button onClick={() => { handleMessage() }}>
+            Send Message
+          </button>
+        </p>
+      </div>
+    );
+  }
 }
 
 export default App;
